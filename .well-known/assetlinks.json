@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.atinystudio.atinymenu",
+      "sha256_cert_fingerprints": [
+        "9B:B1:40:D2:5D:B2:91:B0:3F:18:AA:E6:1F:70:59:3F:EA:55:3D:5A:A9:6D:20:83:AF:B8:97:D4:9B:9B:57:E2"
+      ]
+    }
+  }
+]
