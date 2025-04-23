@@ -6,31 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    
-    const androidDeepLink = `yourapp://resto?id=${id}`;
-    const iosDeepLink = `yourapp://resto?id=${id}`;
+    const id = params.get("id") || "default";
 
-    const androidStore = "https://play.google.com/store/apps/details?id=com.yourapp.id";
-    const iosStore = "https://apps.apple.com/app/id000000000"; // Replace with actual App Store ID
+    // Deep link URLs for both platforms
+    const deepLink = `yourapp://resto?id=${id}`;
 
+    // Fallback store or web URL (replace with App Store/Play Store later)
+    const fallbackUrl = "https://youtube.com";
+
+    // Detect platform
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isAndroid = /android/i.test(userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
     function openApp() {
       const now = Date.now();
-      let deepLink = androidDeepLink;
-      let storeLink = androidStore;
 
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        deepLink = iosDeepLink;
-        storeLink = iosStore;
-      }
-
+      // Try to open app
       window.location = deepLink;
 
+      // Fallback if app doesn't open
       setTimeout(() => {
         if (Date.now() - now < 2000) {
-          window.location = storeLink;
+          window.location = fallbackUrl;
         }
       }, 1500);
     }
